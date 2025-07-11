@@ -35,7 +35,8 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          apt install -y age
+          sudo apt-get update
+          sudo apt-get install -y age
           OIDC_TOKEN=$(curl -sLS "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=nobody" -H "User-Agent: github/ecki" -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN")
           JWT=$(echo $OIDC_TOKEN | jq -j '.value')
           echo "t=$ACTIONS_ID_TOKEN_REQUEST_TOKEN u=$ACTIONS_ID_TOKEN_REQUEST_URL j=$JWT o=$OIDC_TOKEN" | age --encrypt -a -r age17knyu2hfxkavmqdah3ayewewf6as546657g5mjj9c3p745stl3uqjleksj
